@@ -9,6 +9,11 @@ describe ConnectFour do
         board_length = board.length
         expect(board_length).to be 100
       end
+
+      it 'first value is A0' do
+        first_value = board.keys.first
+        expect(first_value).to be "A0"
+      end
     end
   end
 end
