@@ -13,18 +13,23 @@ class ConnectFour
 
   def print_board
     display = ""
+    letters = ""
+    (0..9).each do |letter|
+      letters += "  #{letter} "
+    end
     puts " - - - - - - - - - - - - - - - - - - - -"
     @board.each do |key, item|
       position = key.chars
       if position[1] == "9"
-        display += "|   |\n - - - - - - - - - - - - - - - - - - - -\n" if item.nil?
-        display += "| #{item} |\n - - - - - - - - - - - - - - - - - - - -\n" unless item.nil?
+        display += "|   | #{position[0]}\n - - - - - - - - - - - - - - - - - - - -\n" if item.nil?
+        display += "| #{item} | #{position[0]}\n - - - - - - - - - - - - - - - - - - - -\n" unless item.nil?
         next
       end
       display += "|   " if item.nil?
       display += "| #{item} " unless item.nil?
     end
     puts display
+    puts letters
   end
 end
 
