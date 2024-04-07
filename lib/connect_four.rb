@@ -11,6 +11,10 @@ class ConnectFour
     board
   end
 
+  def add(position, player)
+    @board[position] = player.symbol if @board[position].nil?
+  end
+
   def print_board
     display, letters = "", ""
     (0..9).each { |letter| letters += "  #{letter} " }
