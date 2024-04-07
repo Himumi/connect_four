@@ -13,9 +13,7 @@ class ConnectFour
 
   def print_board
     display, letters = "", ""
-    (0..9).each do |letter|
-      letters += "  #{letter} "
-    end
+    (0..9).each { |letter| letters += "  #{letter} " }
     puts " - - - - - - - - - - - - - - - - - - - -"
     @board.each do |key, item|
       position = key.chars
