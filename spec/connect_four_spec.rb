@@ -21,4 +21,29 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#add' do
+    let(:player_1) { double('player', symbol: "X", name: "foo") }
+    let(:player_2) { double('player', symbol: "O", name: "roo") }
+    context 'when position is nil' do
+      before do
+        game.add("A0", player_1)
+      end
+      it 'adds to the position' do
+        board = game.instance_variable_get(:@board)
+        expect(board["A0"]).to  eq(player_1.symbol)
+      end
+    end
+
+    context 'when position is not nil' do
+      before do
+        game.add("A0", player_1)
+        game.add("A0", player_2)
+      end
+      it 'does not change value' do
+        board = game.instance_variable_get(:@board)
+        expect(board["A0"]).not_to eq(player_2.symbol)
+      end
+    end
+  end
 end
