@@ -12,12 +12,12 @@ describe ConnectFour do
 
       it 'first value is A0' do
         first_value = board.keys.first
-        expect(first_value).to be "A0"
+        expect(first_value).to eq("A0")
       end
 
       it 'last value is J9' do
         last_value = board.keys.last
-        expect(last_value).to be "J9"
+        expect(last_value).to eq("J9")
       end
     end
   end
