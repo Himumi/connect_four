@@ -12,8 +12,7 @@ class ConnectFour
   end
 
   def print_board
-    display = ""
-    letters = ""
+    display, letters = "", ""
     (0..9).each do |letter|
       letters += "  #{letter} "
     end
