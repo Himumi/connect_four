@@ -14,6 +14,11 @@ describe ConnectFour do
         first_value = board.keys.first
         expect(first_value).to be "A0"
       end
+
+      it 'last value is J9' do
+        last_value = board.keys.last
+        expect(last_value).to be "J9"
+      end
     end
   end
 end
