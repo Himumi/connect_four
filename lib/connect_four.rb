@@ -15,6 +15,11 @@ class ConnectFour
     @board[position] = player.symbol if @board[position].nil?
   end
 
+  def valid_input?(input)
+    input = input.chars
+    input[0].between?("A","J") && input[1].between?("0","9")
+  end
+
   def print_board
     display, letters = "", ""
     (0..9).each { |letter| letters += "  #{letter} " }
