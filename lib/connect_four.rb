@@ -20,6 +20,10 @@ class ConnectFour
     input[0].between?("A","J") && input[1].between?("0","9")
   end
 
+  def taken?(input)
+    !@board[input].nil?
+  end
+
   def print_board
     display, letters = "", ""
     (0..9).each { |letter| letters += "  #{letter} " }
