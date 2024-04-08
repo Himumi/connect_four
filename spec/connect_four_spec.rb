@@ -46,4 +46,20 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#valid_input?' do
+    context 'when user input value' do
+      it 'returns true if input is between A0..J9' do
+        input = "A0"
+        check_input = game.valid_input?(input)
+        expect(check_input).to eq(true)
+      end
+
+      it 'returns false if input is not between A0..J9' do
+        input = "L0"
+        check_input = game.valid_input?(input)
+        expect(check_input).not_to eq(true)
+      end
+    end
+  end
 end
