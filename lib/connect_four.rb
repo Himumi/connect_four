@@ -15,6 +15,15 @@ class ConnectFour
     @board[position] = player.symbol if @board[position].nil?
   end
 
+  def get_input
+    puts "Please input position"
+    loop  do
+      position = gets.chomp
+      return position if valid_input?(position) && !taken?(position)
+      puts "You entered wrong position!, please enter again."
+    end
+  end
+
   def valid_input?(input)
     input = input.chars
     input[0].between?("A","J") && input[1].between?("0","9")
@@ -43,5 +52,5 @@ class ConnectFour
   end
 end
 
-game = ConnectFour.new
-game.print_board
+# game = ConnectFour.new
+# game.print_board
