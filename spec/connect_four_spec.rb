@@ -112,4 +112,23 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#convert_to_number' do
+    context 'when user inputs valid value (A0)' do
+
+      it 'returns 00' do
+        input = "A0"
+        converted_input = game.convert_to_number(input)
+        expect(converted_input).to eq("00")
+      end
+    end
+
+    context 'when user inputs invalid value (L0)' do
+      it 'returns nil' do
+        input = "L0"
+        converted_input = game.convert_to_number(input)
+        expect(converted_input).to be_nil
+      end
+    end
+  end
 end
