@@ -24,6 +24,16 @@ class ConnectFour
     end
   end
 
+  def convert_to_number(input)
+    return nil if !valid_input?(input)
+    input = input.chars
+
+
+    letters = ("A".."J").to_a
+    input[0] = letters.index(input[0]).to_s
+    input.join
+  end
+
   def valid_input?(input)
     input = input.chars
     input[0].between?("A","J") && input[1].between?("0","9")
