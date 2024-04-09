@@ -34,6 +34,20 @@ class ConnectFour
     input.join
   end
 
+  def overload?(array)
+    return false if array.length > 2
+    array[0].between?("0", "9") && array[1].between?("0", "9")
+  end
+
+  def convert_to_key(input)
+    input = input.chars
+    return nil if !overload?(input)
+
+    letters = ("A".."J").to_a
+    input[0] = letters[input[0].to_i]
+    input.join
+  end
+
   def valid_input?(input)
     input = input.chars
     input[0].between?("A","J") && input[1].between?("0","9")
