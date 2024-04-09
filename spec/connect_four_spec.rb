@@ -131,4 +131,23 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#convert_to_key' do
+    context 'when input is 00 (valid input)' do
+      it 'returns A0' do
+        input = "00"
+        converted_input = game.convert_to_key(input)
+        expect(converted_input).to eq("A0")
+      end
+    end
+
+    context 'when input is -10 (invalid input)' do
+      it 'returns nil' do
+        input = "-10"
+        converted_input = game.convert_to_key(input)
+        expect(converted_input).to be_nil
+      end
+
+    end
+  end
 end
