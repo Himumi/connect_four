@@ -58,21 +58,22 @@ class ConnectFour
   end
 
   def print_board
-    display, letters = "", ""
+    display, letters = "", "  "
+    dashes = "   - - - - - - - - - - - - - - - - - - - -"
     (0..9).each { |letter| letters += "  #{letter} " }
-    puts " - - - - - - - - - - - - - - - - - - - -"
     @board.each do |key, item|
       position = key.chars
-      if position[1] == "9"
-        display += "|   | #{position[0]}\n - - - - - - - - - - - - - - - - - - - -\n" if item.nil?
-        display += "| #{item} | #{position[0]}\n - - - - - - - - - - - - - - - - - - - -\n" unless item.nil?
+      if position[1] == "0"
+        first = "\n#{dashes}\n#{position[0]} |   |"
+        second = "\n#{dashes}\n#{position[0]} | #{item} |"
+        display += item.nil? ? first : second
         next
       end
-      display += "|   " if item.nil?
-      display += "| #{item} " unless item.nil?
+      display += item.nil? ? "   |" : " #{item} |"
     end
+    print letters
     puts display
-    puts letters
+    puts dashes
   end
 end
 
