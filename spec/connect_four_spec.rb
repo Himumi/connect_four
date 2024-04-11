@@ -198,4 +198,42 @@ describe ConnectFour do
       end
     end
   end
+
+  describe 'update_neighbors' do
+    let(:player) { double('Player', symbol: "X") }
+    let(:enemy) { double('Player', symbol: "O") }
+    describe 'update from D0' do
+      context 'when A0, B0, C0 is allies and F0 is enemy' do
+        before do
+          neighbors = ["A0", "B0", "C0", "D0", "E0"]
+          neighbors.each { |key| game.add(key, player) }
+          game.add("F0", enemy)
+          game.update_neighbors("D0")
+        end
+        it 'has 3 neighbors at left direction' do
+          valid_neighbors = game.instance_variable_get(:@current_neighbors)
+          left_neighbors = valid_neighbors[0].length
+          expect(left_neighbors).to eq(3)
+        end
+
+        it 'has 1 neighbor at right direction' do
+          valid_neighbors = game.instance_variable_get(:@current_neighbors)
+          right_neighbors = valid_neighbors[4].length
+          expect(right_neighbors).to eq(1)
+        end
+
+        it 'returns 0 for above direction' do
+          valid_neighbors = game.instance_variable_get(:@current_neighbors)
+          above_neighbors = valid_neighbors[2].length
+          expect(above_neighbors).to eq(0)
+        end
+
+        it 'returns 0 for below direction' do
+          valid_neighbors = game.instance_variable_get(:@current_neighbors)
+          below_neighbors = valid_neighbors[6].length
+          expect(below_neighbors).to eq(0)
+        end
+      end
+    end
+  end
 end
