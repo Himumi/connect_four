@@ -1,4 +1,5 @@
 class ConnectFour
+  attr_reader :current_neighbors
   def initialize
     @board = create_board
   end
@@ -34,9 +35,8 @@ class ConnectFour
     input.join
   end
 
-  def overload?(array)
-    return false if array.length > 2
-    array[0].between?("0", "9") && array[1].between?("0", "9")
+  def invalid?(array)
+    array.length > 3 || array.any? { |item| !item.between?("0", "9")}
   end
 
   def convert_to_key(input)
