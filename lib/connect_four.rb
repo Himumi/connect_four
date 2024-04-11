@@ -88,8 +88,37 @@ class ConnectFour
 
     convert_to_key(directions[index].join)
   end
+
+  def update_neighbors(key)
+    current = key
+
+    @current_neighbors = (0..7).map do |items|
+      index, stop, current_position, temp = items, false, current, []
+      3.times do
+        current_key = direction(current_position, index)
+        invalid = stop || current_key.nil? || @board[current_key] != @board[current]
+        next stop = true if invalid
+        current_position = current_key
+        temp << current_key
+      end
+      temp
+    end
+  end
 end
 
 # game = ConnectFour.new
-# # game.print_board
+# class Player
+#   attr_reader :symbol
+#   def initialize(symbol)
+#     @symbol = symbol
+#   end
+# end
+
+# player = Player.new("X")
+# ["A0", "B0", "C0", "D0", "E0"].each do |key|
+#   game.add(key, player)
+# end
+
+# game.print_board
+# p game.update_neighbors("D0")
 # p game.direction("A0", 4)
