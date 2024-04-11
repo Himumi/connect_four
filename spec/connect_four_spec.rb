@@ -236,4 +236,56 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#node_in_edge' do
+    let(:player) { double('Player', symbol: "X") }
+    let(:enemy) { double('Player', symbol: "O") }
+    context 'when last node in edge (E0)' do
+      context 'when left sides all are connected' do
+        before do
+          ["B0", "C0", "D0", "E0"].each { |key| game.add(key, player) }
+          game.update_neighbors("E0")
+        end
+        it 'returns true' do
+          all_connected = game.node_in_edge("E0")
+          expect(all_connected).to be true
+        end
+      end
+
+      context 'when above sides all are connected' do
+        before do
+          ["E3", "E2", "E1", "E0"].each { |key| game.add(key, player) }
+          game.update_neighbors("E0")
+        end
+        it 'returns true' do
+          all_connected = game.node_in_edge("E0")
+          expect(all_connected).to be true
+        end
+      end
+
+      context 'when diagonal sides all are connected' do
+        before do
+          ["C1", "B2", "A3", "D0"].each { |key| game.add(key, player) }
+          game.update_neighbors("D0")
+        end
+        it 'returns true' do
+          all_connected = game.node_in_edge("D0")
+          expect(all_connected).to be true
+        end
+      end
+
+      context 'when left sides all are not connected' do
+        before do
+          ["C0", "B0", "D0"].each { |key| game.add(key, player) }
+          game.add("A0", enemy)
+          game.update_neighbors("D0")
+        end
+        it 'returns false' do
+          all_connected = game.node_in_edge("D0")
+          # puts game.current_neighbors
+          expect(all_connected).not_to be true
+        end
+      end
+    end
+  end
 end
