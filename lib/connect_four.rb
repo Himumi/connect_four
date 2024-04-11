@@ -1,13 +1,13 @@
 class ConnectFour
-  attr_reader :current_neighbors
+  attr_reader :current_neighbors, :board
   def initialize
     @board = create_board
   end
 
   def create_board
     board = {}
-    ("A".."J").each do |letter|
-      ("0".."9").each { |number| board["#{letter}#{number}"] = nil }
+    ("0".."9").to_a.reverse.each do |number|
+      ("A".."J").each { |letter| board["#{letter}#{number}"] = nil }
     end
     board
   end
@@ -77,5 +77,6 @@ class ConnectFour
   end
 end
 
-# game = ConnectFour.new
+game = ConnectFour.new
 # game.print_board
+p game.board
