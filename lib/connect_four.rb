@@ -41,7 +41,7 @@ class ConnectFour
 
   def convert_to_key(input)
     input = input.chars
-    return nil if !overload?(input)
+    return nil if invalid?(input)
 
     letters = ("A".."J").to_a
     input[0] = letters[input[0].to_i]
