@@ -76,8 +76,20 @@ class ConnectFour
     puts dashes
     puts letters
   end
+
+  def direction(key, index)
+    key = convert_to_number(key).chars
+    a, b = key[0].to_i, key[1].to_i
+
+    directions = [
+      [a-1, b], [a-1, b+1], [a, b+1], [a+1, b+1],
+      [a+1, b], [a+1, b-1], [a, b-1], [a-1, b-1]
+    ]
+
+    convert_to_key(directions[index].join)
+  end
 end
 
 # game = ConnectFour.new
-# game.print_board
-# p game.board["A0"]
+# # game.print_board
+# p game.direction("A0", 4)
