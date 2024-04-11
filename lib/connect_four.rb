@@ -58,25 +58,26 @@ class ConnectFour
   end
 
   def print_board
-    display, letters = "", "  "
-    dashes = "   - - - - - - - - - - - - - - - - - - - -"
-    (0..9).each { |letter| letters += "  #{letter} " }
+    display, letters, count = "", "  ", 9
+    dashes = "   - - - - - - - - - - - - - - - - - - - -\n"
+    ("A".."J").each { |letter| letters += "  #{letter} " }
     @board.each do |key, item|
       position = key.chars
-      if position[1] == "0"
-        first = "\n#{dashes}\n#{position[0]} |   |"
-        second = "\n#{dashes}\n#{position[0]} | #{item} |"
+      if position[0] == "A"
+        first = "\n#{dashes}#{count} |   |"
+        second = "\n#{dashes}#{count} | #{item} |"
         display += item.nil? ? first : second
+        count -= 1
         next
       end
       display += item.nil? ? "   |" : " #{item} |"
     end
-    print letters
     puts display
     puts dashes
+    puts letters
   end
 end
 
-game = ConnectFour.new
+# game = ConnectFour.new
 # game.print_board
-p game.board
+# p game.board["A0"]
