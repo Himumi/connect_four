@@ -104,6 +104,10 @@ class ConnectFour
       temp
     end
   end
+
+  def node_in_edge(key)
+    @current_neighbors.any? { |items| items.length.eql?(3)}
+  end
 end
 
 # game = ConnectFour.new
