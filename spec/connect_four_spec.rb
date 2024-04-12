@@ -199,7 +199,7 @@ describe ConnectFour do
     end
   end
 
-  describe 'update_neighbors' do
+  describe '#update_neighbors' do
     let(:player) { double('Player', symbol: "X") }
     let(:enemy) { double('Player', symbol: "O") }
     describe 'update from D0' do
