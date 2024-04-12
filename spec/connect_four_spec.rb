@@ -340,4 +340,18 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#draw?' do
+  let(:player) { double('Player', symbol: "X") }
+    context 'when board full without winner' do
+      before do
+        keys = game.board.keys
+        keys.each { |key| game.add(key, player) }
+      end
+      it 'retuns true' do
+        draw = game.draw?
+        expect(draw).to eq(true)
+      end
+    end
+  end
 end
