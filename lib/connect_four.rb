@@ -118,6 +118,10 @@ class ConnectFour
   def won?
     node_in_edge or node_in_middle
   end
+
+  def draw?
+    board.all? { |key, value| value != nil }
+  end
 end
 
 # game = ConnectFour.new
