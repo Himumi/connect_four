@@ -114,6 +114,10 @@ class ConnectFour
       items.length.eql?(1) && current_neighbors[index - 4].length.eql?(2)
     end
   end
+
+  def won?
+    node_in_edge or node_in_middle
+  end
 end
 
 # game = ConnectFour.new
