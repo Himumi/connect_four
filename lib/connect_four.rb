@@ -108,6 +108,12 @@ class ConnectFour
   def node_in_edge(key)
     @current_neighbors.any? { |items| items.length.eql?(3)}
   end
+
+  def node_in_middle(index = 7)
+    current_neighbors.each_with_index.any? do |items, index|
+      items.length.eql?(1) && current_neighbors[index - 4].length.eql?(2)
+    end
+  end
 end
 
 # game = ConnectFour.new
