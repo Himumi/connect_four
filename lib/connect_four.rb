@@ -127,6 +127,10 @@ class ConnectFour
   def switch_player(count)
     @current_player = count.odd? ? players[0] : players[1]
   end
+
+  def over?
+    won? or draw?
+  end
 end
 
 # game = ConnectFour.new
