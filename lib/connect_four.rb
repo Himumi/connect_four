@@ -105,11 +105,11 @@ class ConnectFour
     end
   end
 
-  def node_in_edge(key)
+  def node_in_edge
     @current_neighbors.any? { |items| items.length.eql?(3)}
   end
 
-  def node_in_middle(index = 7)
+  def node_in_middle
     current_neighbors.each_with_index.any? do |items, index|
       items.length.eql?(1) && current_neighbors[index - 4].length.eql?(2)
     end

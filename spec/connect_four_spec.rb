@@ -247,7 +247,7 @@ describe ConnectFour do
           game.update_neighbors("E0")
         end
         it 'returns true' do
-          all_connected = game.node_in_edge("E0")
+          all_connected = game.node_in_edge
           expect(all_connected).to be true
         end
       end
@@ -258,7 +258,7 @@ describe ConnectFour do
           game.update_neighbors("E0")
         end
         it 'returns true' do
-          all_connected = game.node_in_edge("E0")
+          all_connected = game.node_in_edge
           expect(all_connected).to be true
         end
       end
@@ -269,7 +269,7 @@ describe ConnectFour do
           game.update_neighbors("D0")
         end
         it 'returns true' do
-          all_connected = game.node_in_edge("D0")
+          all_connected = game.node_in_edge
           expect(all_connected).to be true
         end
       end
@@ -281,8 +281,7 @@ describe ConnectFour do
           game.update_neighbors("D0")
         end
         it 'returns false' do
-          all_connected = game.node_in_edge("D0")
-          # puts game.current_neighbors
+          all_connected = game.node_in_edge
           expect(all_connected).not_to be true
         end
       end
@@ -300,7 +299,7 @@ describe ConnectFour do
           game.update_neighbors("D3")
         end
         it 'returns true' do
-          all_connected = game.node_in_middle("D3")
+          all_connected = game.node_in_middle
           expect(all_connected).to be true
         end
       end
@@ -311,7 +310,7 @@ describe ConnectFour do
           game.update_neighbors("D3")
         end
         it 'returns true' do
-          all_connected = game.node_in_middle("D3")
+          all_connected = game.node_in_middle
           expect(all_connected).to be true
         end
       end
@@ -322,7 +321,7 @@ describe ConnectFour do
           game.update_neighbors("D3")
         end
         it 'returns true' do
-          all_connected = game.node_in_middle("D3")
+          all_connected = game.node_in_middle
           expect(all_connected).to be true
         end
       end
@@ -334,7 +333,7 @@ describe ConnectFour do
           game.update_neighbors("D3")
         end
         it 'returns false' do
-          all_connected = game.node_in_middle("D3")
+          all_connected = game.node_in_middle
           expect(all_connected).not_to eq(true)
         end
       end
