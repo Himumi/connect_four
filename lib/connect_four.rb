@@ -1,7 +1,8 @@
 class ConnectFour
-  attr_reader :current_neighbors, :board
-  def initialize
+  attr_reader :current_neighbors, :board, :players, :current_player
+  def initialize(first, last)
     @board = create_board
+    @players = [first, last]
   end
 
   def create_board
@@ -121,6 +122,10 @@ class ConnectFour
 
   def draw?
     board.all? { |key, value| value != nil }
+  end
+
+  def switch_player(count)
+    @current_player = count.odd? ? players[0] : players[1]
   end
 end
 
