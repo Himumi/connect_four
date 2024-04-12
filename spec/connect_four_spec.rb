@@ -1,7 +1,9 @@
 require './lib/connect_four'
 
 describe ConnectFour do
-  subject(:game) { described_class.new() }
+  let(:first_player) { double('Player', symbol: "X") }
+  let(:last_player) { double('Player', symbol: "O") }
+  subject(:game) { described_class.new(first_player, last_player) }
   describe '#create_board' do
     context 'when initialize class automatically create board' do
       let(:board) { game.instance_variable_get(:@board) }
@@ -350,6 +352,30 @@ describe ConnectFour do
       it 'retuns true' do
         draw = game.draw?
         expect(draw).to eq(true)
+      end
+    end
+  end
+
+  describe '#switch_player' do
+    context 'when round count is odd number' do
+      before do
+        odd = 5
+        game.switch_player(odd)
+      end
+      it 'returns first_player as current player' do
+        curr_player = game.instance_variable_get(:@current_player)
+        expect(curr_player.symbol).to eq("X")
+      end
+    end
+
+    context 'when round count is even number' do
+      before do
+        even = 8
+        game.switch_player(even)
+      end
+      it 'returns last_player as current player' do
+        curr_player = game.instance_variable_get(:@current_player)
+        expect(curr_player.symbol).to eq("O")
       end
     end
   end
