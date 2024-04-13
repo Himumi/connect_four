@@ -412,4 +412,25 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#turn_player' do
+    context 'check looping in method' do
+      before(:each) do
+        allow(game).to receive(:puts).with("Please input position")
+        allow(game).to receive(:gets).and_return("D5", "F4")
+        allow(game).to receive(:add)
+        allow(game).to receive(:print_board)
+        allow(game).to receive(:update_neighbors)
+      end
+      it 'should stop loop, when conditions are fulfilled' do
+        allow(game).to receive(:over?).and_return(true)
+        expect{ game.turn_player }.not_to change{ game.round }.from(1)
+      end
+
+      it 'will ask input again, when conditions are not fulfilled' do
+        allow(game).to receive(:over?).and_return(false, true)
+        expect{ game.turn_player }.to change{ game.round }.from(1).to(2)
+      end
+    end
+  end
 end
