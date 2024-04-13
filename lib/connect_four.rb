@@ -146,6 +146,47 @@ class ConnectFour
       @round += 1
     end
   end
+
+  def introduction
+    docs = <<-HEREDOC
+
+      This is a game called Connect four. You will provide with board 10 x 10.
+      Letters in bottom and numbers in left side to help when you add color in board
+
+              - - - - - - - - - - - - - - - - - - - -
+            9 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+            8 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+            7 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+            6 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+            5 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+            4 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+            3 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+            2 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+            1 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+            0 |   |   |   |   |   |   |   |   |   |   |
+              - - - - - - - - - - - - - - - - - - - -
+                A   B   C   D   E   F   G   H   I   J
+
+      The winner of game is the one who make 4 places in a row connected first
+      It can be horizontal, vertical, or diagonal.
+
+      How to add your color : You can input the coordinate of the board insensitive
+      like "A0" or "a0". but you can't wrong input value like "00" or "!A".
+      It starts from first player looping until game is over.
+
+      let's get started!
+
+    HEREDOC
+  end
 end
 
 # game = ConnectFour.new
