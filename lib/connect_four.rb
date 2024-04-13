@@ -187,6 +187,12 @@ class ConnectFour
 
     HEREDOC
   end
+
+  def game_over_message
+    winner_message = "Game over!!\nThe winner of this game is #{current_player.name}."
+    draw_mesage = "Game over!!\nGame result is draw."
+    won? ? winner_message : draw_mesage
+  end
 end
 
 # game = ConnectFour.new
