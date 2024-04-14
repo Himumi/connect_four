@@ -95,7 +95,7 @@ class ConnectFour
   end
 
   def invalid?(array)
-    array.length > 3 || array.any? { |item| !item.between?("0", "9")}
+    array.length > 3 or array.any? { |item| !item.between?("0", "9") }
   end
 
   def update_neighbors(key)
