@@ -65,7 +65,6 @@ describe ConnectFour do
 
   describe '#taken?' do
     let(:position) { "A0" }
-    let(:player) { double('Player', symbol: "X") }
 
     context 'when position is not taken' do
       it 'returns false' do
@@ -76,7 +75,7 @@ describe ConnectFour do
 
     context 'when position is taken' do
       before do
-        game.add(position, player)
+        game.add(position, first_player)
       end
       it 'returns true' do
         check_position = game.taken?(position)
