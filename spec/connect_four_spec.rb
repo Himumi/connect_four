@@ -26,9 +26,11 @@ describe ConnectFour do
 
   describe '#add' do
     context 'when position is nil' do
+
       before do
         game.add("A0", first_player)
       end
+
       it 'adds to the position' do
         board = game.instance_variable_get(:@board)
         expect(board["A0"]).to eq(first_player.symbol)
@@ -36,10 +38,12 @@ describe ConnectFour do
     end
 
     context 'when position is not nil' do
+
       before do
         game.add("A0", first_player)
         game.add("A0", last_player)
       end
+
       it 'does not change value' do
         board = game.instance_variable_get(:@board)
         expect(board["A0"]).not_to eq(last_player.symbol)
