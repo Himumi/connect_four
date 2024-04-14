@@ -375,24 +375,28 @@ describe ConnectFour do
 
   describe '#switch_player' do
     context 'when round count is odd number' do
+
       before do
         odd = 5
         game.switch_player(odd)
       end
+
       it 'returns first_player as current player' do
         curr_player = game.instance_variable_get(:@current_player)
-        expect(curr_player.symbol).to eq("X")
+        expect(curr_player.symbol).to eq(first_player.symbol)
       end
     end
 
     context 'when round count is even number' do
+
       before do
         even = 8
         game.switch_player(even)
       end
+
       it 'returns last_player as current player' do
         curr_player = game.instance_variable_get(:@current_player)
-        expect(curr_player.symbol).to eq("O")
+        expect(curr_player.symbol).to eq(last_player.symbol)
       end
     end
   end
