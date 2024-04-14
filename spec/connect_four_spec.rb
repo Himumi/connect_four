@@ -74,9 +74,11 @@ describe ConnectFour do
     end
 
     context 'when position is taken' do
+
       before do
         game.add(position, first_player)
       end
+
       it 'returns true' do
         check_position = game.taken?(position)
         expect(check_position).to eq(true)
