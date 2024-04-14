@@ -146,7 +146,7 @@ class ConnectFour
   end
 
   def draw?
-    board.all? { |key, value| value != nil }
+    board.all? { |key, value| !value.nil? }
   end
 
   private
