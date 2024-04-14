@@ -7,134 +7,12 @@ class ConnectFour
     @current_player = switch_player(round)
   end
 
-  def create_board
-    board = {}
-    ("0".."9").to_a.reverse.each do |number|
-      ("A".."J").each { |letter| board["#{letter}#{number}"] = nil }
-    end
-    board
-  end
-
-  def add(position, player)
-    @board[position] = player.symbol if @board[position].nil?
-  end
-
-  def get_input
-    puts "Please input position"
-    loop  do
-      position = gets.chomp.chars
-      position[0] = position[0].upcase
-      position = position.join
-      return position if valid_input?(position) && !taken?(position)
-      puts "You entered wrong position!, please enter again."
-    end
-  end
-
-  def convert_to_number(input)
-    return nil if !valid_input?(input)
-    input = input.chars
-
-
-    letters = ("A".."J").to_a
-    input[0] = letters.index(input[0]).to_s
-    input.join
-  end
-
-  def invalid?(array)
-    array.length > 3 || array.any? { |item| !item.between?("0", "9")}
-  end
-
-  def convert_to_key(input)
-    input = input.chars
-    return nil if invalid?(input)
-
-    letters = ("A".."J").to_a
-    input[0] = letters[input[0].to_i]
-    input.join
-  end
-
-  def valid_input?(input)
-    input = input.chars
-    return false if input.length.eql?(1)
-    input[0].between?("A","J") && input[1].between?("0","9")
-  end
-
-  def taken?(input)
-    !@board[input].nil?
-  end
-
-  def print_board
-    display, letters, count = "", "  ", 9
-    dashes = "   - - - - - - - - - - - - - - - - - - - -\n"
-    ("A".."J").each { |letter| letters += "  #{letter} " }
-    @board.each do |key, item|
-      position = key.chars
-      if position[0] == "A"
-        first = "\n#{dashes}#{count} |   |"
-        second = "\n#{dashes}#{count} | #{item} |"
-        display += item.nil? ? first : second
-        count -= 1
-        next
-      end
-      display += item.nil? ? "   |" : " #{item} |"
-    end
-    puts display
-    puts dashes
-    puts letters
-  end
-
-  def direction(key, index)
-    key = convert_to_number(key).chars
-    a, b = key[0].to_i, key[1].to_i
-
-    directions = [
-      [a-1, b], [a-1, b+1], [a, b+1], [a+1, b+1],
-      [a+1, b], [a+1, b-1], [a, b-1], [a-1, b-1]
-    ]
-
-    convert_to_key(directions[index].join)
-  end
-
-  def update_neighbors(key)
-    current = key
-
-    @current_neighbors = (0..7).map do |items|
-      index, stop, current_position, temp = items, false, current, []
-      3.times do
-        current_key = direction(current_position, index)
-        invalid = stop || current_key.nil? || @board[current_key] != @board[current]
-        next stop = true if invalid
-        current_position = current_key
-        temp << current_key
-      end
-      temp
-    end
-  end
-
-  def node_in_edge
-    @current_neighbors.any? { |items| items.length.eql?(3)}
-  end
-
-  def node_in_middle
-    current_neighbors.each_with_index.any? do |items, index|
-      items.length.eql?(1) && current_neighbors[index - 4].length.eql?(2)
-    end
-  end
-
-  def won?
-    node_in_edge or node_in_middle
-  end
-
-  def draw?
-    board.all? { |key, value| value != nil }
-  end
-
-  def switch_player(count)
-    @current_player = count.odd? ? players[0] : players[1]
-  end
-
-  def over?
-    won? or draw?
+  def play
+    introduction
+    ask_player_name
+    print_board
+    turn_player
+    game_over_message
   end
 
   def turn_player
@@ -150,6 +28,128 @@ class ConnectFour
     end
   end
 
+  def create_board
+    board = {}
+    ("0".."9").to_a.reverse.each do |number|
+      ("A".."J").each { |letter| board["#{letter}#{number}"] = nil }
+    end
+    board
+  end
+
+  def add(position, player)
+    @board[position] = player.symbol if @board[position].nil?
+  end
+
+  def ask_player_name
+    2.times do |i|
+      player_name = i == 0 ? "first player name" : "last player name"
+      puts "Please enter #{player_name}"
+      @players[i].name = gets.chomp
+    end
+  end
+
+  def switch_player(count)
+    @current_player = count.odd? ? players[0] : players[1]
+  end
+
+  def get_input
+    puts "Please input position"
+
+    loop  do
+      position = gets.chomp.chars
+      position[0] = position[0].upcase
+      position = position.join
+      return position if valid_input?(position) && !taken?(position)
+
+      puts "You entered wrong position!, please enter again."
+    end
+  end
+
+  def convert_to_number(input)
+    return nil if !valid_input?(input)
+    input = input.chars
+
+    letters = ("A".."J").to_a
+    input[0] = letters.index(input[0]).to_s
+    input.join
+  end
+
+  def convert_to_key(input)
+    input = input.chars
+    return nil if invalid?(input)
+
+    letters = ("A".."J").to_a
+    input[0] = letters[input[0].to_i]
+    input.join
+  end
+
+  def valid_input?(input)
+    input = input.chars
+    return false if input.length.eql?(1)
+
+    input[0].between?("A","J") && input[1].between?("0","9")
+  end
+
+  def taken?(input)
+    !@board[input].nil?
+  end
+
+  def invalid?(array)
+    array.length > 3 || array.any? { |item| !item.between?("0", "9")}
+  end
+
+  def update_neighbors(key)
+    current = key
+
+    @current_neighbors = (0..7).map do |items|
+      index, stop, current_position, temp = items, false, current, []
+      3.times do
+        current_key = direction(current_position, index)
+        invalid = stop || current_key.nil? || @board[current_key] != @board[current]
+        next stop = true if invalid
+
+        current_position = current_key
+        temp << current_key
+      end
+      temp
+    end
+  end
+
+  def direction(key, index)
+    key = convert_to_number(key).chars
+    a, b = key[0].to_i, key[1].to_i
+
+    directions = [
+      [a-1, b], [a-1, b+1], [a, b+1], [a+1, b+1],
+      [a+1, b], [a+1, b-1], [a, b-1], [a-1, b-1]
+    ]
+
+    convert_to_key(directions[index].join)
+  end
+
+  def node_in_edge
+    @current_neighbors.any? { |items| items.length.eql?(3)}
+  end
+
+  def node_in_middle
+    current_neighbors.each_with_index.any? do |items, index|
+      items.length.eql?(1) && current_neighbors[index - 4].length.eql?(2)
+    end
+  end
+
+  def over?
+    won? or draw?
+  end
+
+  def won?
+    node_in_edge or node_in_middle
+  end
+
+  def draw?
+    board.all? { |key, value| value != nil }
+  end
+
+  private
   def introduction
     docs = <<-HEREDOC
 
@@ -202,20 +202,24 @@ class ConnectFour
     puts "#{current_player.name.capitalize} turn"
   end
 
-  def play
-    introduction
-    ask_player_name
-    print_board
-    turn_player
-    game_over_message
-  end
-
-  def ask_player_name
-    2.times do |i|
-      player_name = i == 0 ? "first player name" : "last player name"
-      puts "Please enter #{player_name}"
-      @players[i].name = gets.chomp
+    def print_board
+    display, letters, count = "", "  ", 9
+    dashes = "   - - - - - - - - - - - - - - - - - - - -\n"
+    ("A".."J").each { |letter| letters += "  #{letter} " }
+    @board.each do |key, item|
+      position = key.chars
+      if position[0] == "A"
+        first = "\n#{dashes}#{count} |   |"
+        second = "\n#{dashes}#{count} | #{item} |"
+        display += item.nil? ? first : second
+        count -= 1
+        next
+      end
+      display += item.nil? ? "   |" : " #{item} |"
     end
+    puts display
+    puts dashes
+    puts letters
   end
 end
 
