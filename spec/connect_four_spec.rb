@@ -151,47 +151,46 @@ describe ConnectFour do
   end
 
   describe '#direction' do
-    let(:player) { double('Player', symbol: "X") }
-    let(:enemy) { double('Player', symbol: "O") }
-    let(:neighbors) { ["B0", "B1", "C1", "D1", "D0",] }
     context 'when current position is C0' do
+      let(:neighbors) { ["B0", "B1", "C1", "D1", "D0"] }
+
       before do
-        position = "C0"
-        neighbors.each do |neighbor|
-          game.add(neighbor, player)
-        end
-        game.add(position, player)
+        last_position = "C0"
+        neighbors.each { |neighbor| game.add(neighbor, first_player) }
+        game.add(last_position, first_player)
       end
+
       it 'has C1' do
         board = game.instance_variable_get(:@board)
         c1 = board["C1"]
-        expect(c1).to eq(player.symbol)
+        expect(c1).to eq(first_player.symbol)
       end
 
       it 'has 5 neighbors, when close border' do
         board = game.instance_variable_get(:@board)
-        all_five = neighbors.all? { |key| board[key] == "X"}
+        all_five = neighbors.all? { |key| board[key] == first_player.symbol }
         expect(all_five).to eq(true)
-        end
+      end
+
       context 'when B0 owned by other' do
-        let(:neighbors) { ["B1", "C1", "D1", "D0",] }
+        let(:neighbors) { ["B1", "C1", "D1", "D0"] }
+
         before do
-          position = "C0"
-          neighbors.each do |neighbor|
-            game.add(neighbor, player)
-          end
-          game.add(position, player)
-          game.add("B0", enemy)
+          last_position = "C0"
+          neighbors.each { |neighbor| game.add(neighbor, first_player) }
+          game.add(last_position, first_player)
+          game.add("B0", last_player)
         end
+
         it 'has not B0' do
           board = game.instance_variable_get(:@board)
           b0 = board["B0"]
-          expect(b0).not_to eq(player.symbol)
+          expect(b0).not_to eq(first_player.symbol)
         end
 
         it 'has 4 neighbors' do
           board = game.instance_variable_get(:@board)
-          all_four = neighbors.all? { |key| board[key] == player.symbol }
+          all_four = neighbors.all? { |key| board[key] == first_player.symbol }
           expect(all_four).to eq(true)
         end
       end
