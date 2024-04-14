@@ -56,9 +56,8 @@ class ConnectFour
     puts "Please input position"
 
     loop  do
-      position = gets.chomp.chars
+      position = gets.chomp
       position[0] = position[0].upcase
-      position = position.join
       return position if valid_input?(position) && !taken?(position)
 
       puts "You entered wrong position!, please enter again."
