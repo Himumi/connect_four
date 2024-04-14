@@ -418,7 +418,7 @@ describe ConnectFour do
         allow(game).to receive(:won?).and_return(false)
         allow(game).to receive(:draw?).and_return(true)
       end
-      
+
       it 'returns true, if #draw? returns true' do
         game_over = game.over?
         expect(game_over).to be true
@@ -439,6 +439,7 @@ describe ConnectFour do
 
   describe '#turn_player' do
     context 'check looping in method' do
+
       before(:each) do
         allow(game).to receive(:puts).with("Please input position")
         allow(game).to receive(:gets).and_return("D5", "F4")
@@ -446,6 +447,7 @@ describe ConnectFour do
         allow(game).to receive(:print_board)
         allow(game).to receive(:update_neighbors)
       end
+
       it 'should stop loop, when conditions are fulfilled' do
         allow(game).to receive(:over?).and_return(true)
         expect{ game.turn_player }.not_to change{ game.round }.from(1)
