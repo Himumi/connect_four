@@ -66,7 +66,7 @@ class ConnectFour
   end
 
   def convert_to_number(input)
-    return nil if !valid_input?(input)
+    return nil unless valid_input?(input)
     input = input.chars
 
     letters = ("A".."J").to_a
