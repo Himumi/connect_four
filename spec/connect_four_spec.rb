@@ -403,10 +403,12 @@ describe ConnectFour do
 
   describe '#over?' do
     context 'when one of coditional returns true' do
+
       before do
         allow(game).to receive(:won?).and_return(true)
         allow(game).to receive(:draw?).and_return(false)
       end
+
       it 'returns true, if #won? returns true' do
         game_over = game.over?
         expect(game_over).to be true
@@ -416,6 +418,7 @@ describe ConnectFour do
         allow(game).to receive(:won?).and_return(false)
         allow(game).to receive(:draw?).and_return(true)
       end
+      
       it 'returns true, if #draw? returns true' do
         game_over = game.over?
         expect(game_over).to be true
