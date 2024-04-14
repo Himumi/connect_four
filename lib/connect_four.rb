@@ -37,7 +37,7 @@ class ConnectFour
   end
 
   def add(position, player)
-    @board[position] = player.symbol if @board[position].nil?
+    @board[position] = player.symbol unless taken?(position)
   end
 
   def ask_player_name
