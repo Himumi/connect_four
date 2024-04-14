@@ -133,7 +133,7 @@ class ConnectFour
 
   def node_in_middle
     current_neighbors.each_with_index.any? do |items, index|
-      items.length.eql?(1) && current_neighbors[index - 4].length.eql?(2)
+      items.length.eql?(1) and current_neighbors[index - 4].length.eql?(2)
     end
   end
 
