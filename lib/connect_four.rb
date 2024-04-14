@@ -4,6 +4,7 @@ class ConnectFour
     @board = create_board
     @players = [first, last]
     @round = 1
+    @current_player = switch_player(round)
   end
 
   def create_board
@@ -79,6 +80,7 @@ class ConnectFour
     puts display
     puts dashes
     puts letters
+    puts "\n#{current_player.name.capitalize} turn"
   end
 
   def direction(key, index)
@@ -137,13 +139,13 @@ class ConnectFour
 
   def turn_player
     loop do
-      switch_player(round)
       input = get_input
       add(input, current_player)
       update_neighbors(input)
       print_board
       return if over?
       @round += 1
+      switch_player(round)
     end
   end
 
