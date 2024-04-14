@@ -194,7 +194,14 @@ class ConnectFour
   def game_over_message
     winner_message = "Game over!!\nThe winner of this game is #{current_player.name}."
     draw_mesage = "Game over!!\nGame result is draw."
-    won? ? winner_message : draw_mesage
+    puts won? ? winner_message : draw_mesage
+  end
+
+  def play
+    introduction
+    print_board
+    turn_player
+    game_over_message
   end
 end
 
