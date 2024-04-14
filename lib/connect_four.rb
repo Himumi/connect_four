@@ -42,7 +42,7 @@ class ConnectFour
 
   def ask_player_name
     2.times do |i|
-      player_name = i == 0 ? "first player name" : "last player name"
+      player_name = i.eql?(0) ? "first player name" : "last player name"
       puts "Please enter #{player_name}"
       @players[i].name = gets.chomp
     end
