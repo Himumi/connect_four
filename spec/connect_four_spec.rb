@@ -1,8 +1,8 @@
 require './lib/connect_four'
 
 describe ConnectFour do
-  let(:first_player) { double('Player', symbol: "X") }
-  let(:last_player) { double('Player', symbol: "O") }
+  let(:first_player) { double('Player', symbol: "X", name: "foo") }
+  let(:last_player) { double('Player', symbol: "O", name: "him") }
   subject(:game) { described_class.new(first_player, last_player) }
   describe '#create_board' do
     context 'when initialize class automatically create board' do
