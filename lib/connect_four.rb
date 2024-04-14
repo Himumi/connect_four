@@ -188,6 +188,7 @@ class ConnectFour
       let's get started!
 
     HEREDOC
+    puts docs
   end
 
   def game_over_message
