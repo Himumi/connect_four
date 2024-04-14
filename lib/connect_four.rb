@@ -128,7 +128,7 @@ class ConnectFour
   end
 
   def node_in_edge
-    @current_neighbors.any? { |items| items.length.eql?(3)}
+    @current_neighbors.any? { |items| items.length.eql?(3) }
   end
 
   def node_in_middle
