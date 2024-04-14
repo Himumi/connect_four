@@ -105,7 +105,7 @@ class ConnectFour
       index, stop, current_position, temp = items, false, current, []
       3.times do
         current_key = direction(current_position, index)
-        invalid = stop || current_key.nil? || @board[current_key] != @board[current]
+        invalid = stop || current_key.nil? || !@board[current_key].eql?(@board[current])
         next stop = true if invalid
 
         current_position = current_key
