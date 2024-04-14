@@ -80,7 +80,6 @@ class ConnectFour
     puts display
     puts dashes
     puts letters
-    puts "\n#{current_player.name.capitalize} turn"
   end
 
   def direction(key, index)
@@ -139,6 +138,7 @@ class ConnectFour
 
   def turn_player
     loop do
+      print_player_turn
       input = get_input
       add(input, current_player)
       update_neighbors(input)
@@ -195,6 +195,10 @@ class ConnectFour
     winner_message = "Game over!!\nThe winner of this game is #{current_player.name}."
     draw_mesage = "Game over!!\nGame result is draw."
     puts won? ? winner_message : draw_mesage
+  end
+
+  def print_player_turn
+    puts "#{current_player.name.capitalize} turn"
   end
 
   def play

@@ -441,6 +441,7 @@ describe ConnectFour do
     context 'check looping in method' do
 
       before(:each) do
+        allow(game).to receive(:print_player_turn)
         allow(game).to receive(:puts).with("Please input position")
         allow(game).to receive(:gets).and_return("D5", "F4")
         allow(game).to receive(:add)
