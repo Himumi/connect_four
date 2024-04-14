@@ -83,7 +83,6 @@ class ConnectFour
   end
 
   def valid_input?(input)
-    input = input.chars
     return false unless input.length.eql?(2)
 
     input[0].between?("A","J") and input[1].between?("0","9")
