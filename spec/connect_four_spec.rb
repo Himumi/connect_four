@@ -86,10 +86,12 @@ describe ConnectFour do
 
   describe '#get_input' do
     context 'when user inputs valid position' do
+
       before do
         valid_input = "A0"
         allow(game).to receive(:gets).and_return(valid_input)
       end
+
       it 'stops loop and returns input' do
         error_message = "You entered wrong position!, please enter again."
         expect(game).not_to receive(:puts).with(error_message)
