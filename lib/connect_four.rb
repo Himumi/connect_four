@@ -207,8 +207,7 @@ class ConnectFour
     dashes = "   - - - - - - - - - - - - - - - - - - - -\n"
     ("A".."J").each { |letter| letters += "  #{letter} " }
     @board.each do |key, item|
-      position = key.chars
-      if position[0] == "A"
+      if key[0] == "A"
         first = "\n#{dashes}#{count} |   |"
         second = "\n#{dashes}#{count} | #{item} |"
         display += item.nil? ? first : second
