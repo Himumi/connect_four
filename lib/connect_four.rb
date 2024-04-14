@@ -149,7 +149,7 @@ class ConnectFour
 
   private
   def introduction
-    docs = <<-HEREDOC
+    puts <<-HEREDOC
 
       This is a game called Connect four. You will provide with board 10 x 10.
       Letters in bottom and numbers in left side to help when you add color in board
@@ -187,7 +187,6 @@ class ConnectFour
       let's get started!
 
     HEREDOC
-    puts docs
   end
 
   def game_over_message
