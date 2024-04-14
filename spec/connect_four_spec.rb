@@ -207,16 +207,16 @@ describe ConnectFour do
   end
 
   describe '#update_neighbors' do
-    let(:player) { double('Player', symbol: "X") }
-    let(:enemy) { double('Player', symbol: "O") }
     describe 'update from D0' do
       context 'when A0, B0, C0 is allies and F0 is enemy' do
+
         before do
           neighbors = ["A0", "B0", "C0", "D0", "E0"]
-          neighbors.each { |key| game.add(key, player) }
-          game.add("F0", enemy)
+          neighbors.each { |key| game.add(key, first_player) }
+          game.add("F0", last_player)
           game.update_neighbors("D0")
         end
+
         it 'has 3 neighbors at left direction' do
           valid_neighbors = game.instance_variable_get(:@current_neighbors)
           left_neighbors = valid_neighbors[0].length
