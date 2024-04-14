@@ -204,9 +204,18 @@ class ConnectFour
 
   def play
     introduction
+    ask_player_name
     print_board
     turn_player
     game_over_message
+  end
+
+  def ask_player_name
+    2.times do |i|
+      player_name = i == 0 ? "first player name" : "last player name"
+      puts "Please enter #{player_name}"
+      @players[i].name = gets.chomp
+    end
   end
 end
 
