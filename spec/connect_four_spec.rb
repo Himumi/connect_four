@@ -302,15 +302,14 @@ describe ConnectFour do
   end
 
   describe '#node_in_middle' do
-    let(:player) { double('Player', symbol: "X") }
-    let(:enemy) { double('Player', symbol: "O") }
-
-    describe 'when last added node in middle (D3)' do
+    describe 'when last added node in middle is (D3)' do
       context 'when left side is  C3, and right side is E3, F3' do
+
         before do
-          ["C3", "E3", "F3", "D3"].each { |key| game.add(key, player) }
+          ["C3", "E3", "F3", "D3"].each { |key| game.add(key, first_player) }
           game.update_neighbors("D3")
         end
+
         it 'returns true' do
           all_connected = game.node_in_middle
           expect(all_connected).to be true
@@ -318,10 +317,12 @@ describe ConnectFour do
       end
 
       context 'when above side is D4, and below side is D2, D1' do
+
         before do
-          ["D4", "D2", "D1", "D3"].each { |key| game.add(key, player) }
+          ["D4", "D2", "D1", "D3"].each { |key| game.add(key, first_player) }
           game.update_neighbors("D3")
         end
+
         it 'returns true' do
           all_connected = game.node_in_middle
           expect(all_connected).to be true
@@ -329,10 +330,12 @@ describe ConnectFour do
       end
 
       context 'when left above side is C4, and right below side is E2, F1' do
+
         before do
-          ["C4", "E2", "F1", "D3"].each { |key| game.add(key, player) }
+          ["C4", "E2", "F1", "D3"].each { |key| game.add(key, first_player) }
           game.update_neighbors("D3")
         end
+
         it 'returns true' do
           all_connected = game.node_in_middle
           expect(all_connected).to be true
@@ -340,11 +343,13 @@ describe ConnectFour do
       end
 
       context 'when all four nodes are not connected' do
+
         before do
-          ["C3", "E3", "D3"].each { |key| game.add(key, player) }
-          game.add("F3", enemy)
+          ["C3", "E3", "D3"].each { |key| game.add(key, first_player) }
+          game.add("F3", last_player)
           game.update_neighbors("D3")
         end
+
         it 'returns false' do
           all_connected = game.node_in_middle
           expect(all_connected).not_to eq(true)
