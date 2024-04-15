@@ -201,7 +201,7 @@ class ConnectFour
 
     def print_board
     display, letters, count = "", "  ", 9
-    dashes = "\n   - - - - - - - - - - - - - - - - - - - -\n"
+    dashes = "   - - - - - - - - - - - - - - - - - - - -\n"
     ("A".."J").each { |letter| letters += "  #{letter} " }
     @board.each do |key, item|
       if key[0] == "A"
@@ -213,7 +213,7 @@ class ConnectFour
       end
       display += item.nil? ? "   |" : " #{item} |"
     end
-    puts display + dashes + letters
+    puts display + "\n#{dashes}" + letters
   end
 end
 
