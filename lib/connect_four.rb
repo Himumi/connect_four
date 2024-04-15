@@ -58,7 +58,7 @@ class ConnectFour
     loop  do
       position = gets.chomp
       position[0] = position[0].upcase
-      return position if valid_input?(position) && !taken?(position)
+      return position if valid_input?(position) and !taken?(position)
 
       puts "You entered wrong position!, please enter again."
     end
